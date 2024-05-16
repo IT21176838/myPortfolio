@@ -1,10 +1,55 @@
-import React from 'react'
+import {delay, motion} from "framer-motion"
+import React, { useState } from 'react'
 import "./app.scss"
 
 function Test() {
-  return (
+
+    const [open, setOpen] = useState(false)
+ 
+    const variants = {
+        visible: (i)=>({
+        
+            opacity:1, x:100, 
+         transition: {delay:i * 0.3},
+            // transition:{type:"spring", stiffness:100, damping:100}},
+    }),
+        hidden:{opacity:0},
+    }
+ 
+    const items = [
+        "item1", "item2", "item3", "item4"
+    ]
+ 
+    return (
     <div className='course'>
-        <div className='box'></div>
+
+        <motion.ul initial="hidden" animate="visible" variants={variants}>
+        
+           {items.map((item,i) => (
+            <motion.li variants={variants}
+             key={item}custom={i}>item</motion.li>
+           )) }
+        </motion.ul>
+
+
+
+        {/* </div><motion.div className='box' 
+
+        variants={variants}
+        initial='hidden'
+        animate='visible'
+        transition={{duration:2}}
+        animate={open ? 'visible' : 'hidden'}
+        initial={{opacity:0.5, scale:0.5}} 
+        transition={{duration:2 }}
+        whileHover={{opacity:1, scale:2}}
+        whileTap={{scale:1, scale:2}}
+        whileInView={{opacity:1, scale:2}}
+        drag>
+              
+         </motion.div>
+
+         <button onClick={()=>setOpen(prev=>!prev)}>Click</button> */}
     </div>
   )
 }
